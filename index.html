@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santuario Secreto - Tienda Exclusiva para la Mujer Profesional</title>
+    <meta name="description" content="Descubre la colección más prestigiosa y secreta de artículos de lujo. Compra de forma segura y discreta.">
+    <meta name="keywords" content="lujo, prestigio, mujer profesional, exclusivo, tienda secreta, seguridad, moda, accesorios">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">SANTUARIO</div>
+        
+        <button class="menu-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Abrir Menú de Navegación">☰</button>
+
+        <nav id="main-nav" aria-label="Navegación Principal">
+            <ul>
+                <li><a href="#productos">Colección</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#" id="cart-icon" aria-label="Ver Carrito">🛒 Carrito (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero-carousel" class="hero">
+    <div class="carousel-container">
+        <div class="carousel-slide active" style="background-image: url('fondo-lujo.jpg');">
+            <div class="slide-content">
+                <h1 id="hero-title">Tu Refugio de Lujo y Discreción.</h1>
+                <p>Donde la Exclusividad es una Promesa. Para la Mujer que Lo Tiene Todo.</p>
+                <a href="#productos" class="cta-button">Ver Colección Secreta</a>
+            </div>
+        </div>
+
+        <div class="carousel-slide" style="background-image: url('fondo-lujo3.jpg');">
+            <div class="slide-content">
+                <h2 class="slide-title">Exclusividad Nocturna</h2>
+                <p>El Reloj de Zafiro que solo tú mereces.</p>
+                <a href="#productos" class="cta-button">Descubre el Misterio</a>
+            </div>
+        </div>
+
+        <div class="carousel-slide" style="background-image: url('fondo-lujo2.jpg');">
+            <div class="slide-content">
+                <h2 class="slide-title">El Velvet Secret</h2>
+                <p>La discreción es el verdadero lujo. Envíos con empaque secreto.</p>
+                <a href="#productos" class="cta-button">Adquirir Ahora</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="carousel-dots-container">
+        </div>
+        </section>
+
+        <section id="productos" class="productos">
+            <div class="filters-container">
+            <label for="filter-price" class="filter-label">Filtrar por Precio Máximo:</label>
+            <input type="range" id="filter-price" min="0" max="300" value="300" step="10" class="price-slider">
+            <span id="max-price-display">$300</span>
+    
+            <label for="search-term" class="filter-label">Buscar Artículo:</label>
+            <input type="text" id="search-term" placeholder="Escribe un nombre..." class="search-input">
+            </div>
+            <h2 class="section-title">Nuestra Selección Prestigiosa</h2>
+            <div id="product-list" class="product-grid">
+                <div class="product-card" data-id="1" data-name="Reloj de Zafiro Nocturno" data-price="250.00">
+                    <img src="placeholder-producto-1.jpg" alt="Reloj de pulsera de zafiro en color negro.">
+                    <h3>Reloj de Zafiro Nocturno</h3>
+                    <p class="price">$250.00</p>
+                    <button class="add-to-cart">Añadir al Santuario</button>
+                </div>
+                <div class="product-card" data-id="1" data-name="Reloj de Zafiro Nocturno" data-price="250.00">
+                    <img src="placeholder-producto-1.jpg" alt="Reloj de pulsera de zafiro en color negro.">
+                    <h3>Reloj de Zafiro Nocturno</h3>
+                    <p class="price">$250.00</p>
+                    <button class="add-to-cart">Añadir al Santuario</button>
+                </div>
+                <div class="product-card" data-id="1" data-name="Reloj de Zafiro Nocturno" data-price="250.00">
+                    <img src="placeholder-producto-1.jpg" alt="Reloj de pulsera de zafiro en color negro.">
+                    <h3>Reloj de Zafiro Nocturno</h3>
+                    <p class="price">$250.00</p>
+                    <button class="add-to-cart">Añadir al Santuario</button>
+                </div>
+                <div class="product-card" data-id="1" data-name="Reloj de Zafiro Nocturno" data-price="250.00">
+                    <img src="placeholder-producto-1.jpg" alt="Reloj de pulsera de zafiro en color negro.">
+                    <h3>Reloj de Zafiro Nocturno</h3>
+                    <p class="price">$250.00</p>
+                    <button class="add-to-cart">Añadir al Santuario</button>
+                </div>
+                <div class="product-card" data-id="1" data-name="Reloj de Zafiro Nocturno" data-price="250.00">
+                    <img src="placeholder-producto-1.jpg" alt="Reloj de pulsera de zafiro en color negro.">
+                    <h3>Reloj de Zafiro Nocturno</h3>
+                    <p class="price">$250.00</p>
+                    <button class="add-to-cart">Añadir al Santuario</button>
+                </div>
+                <div class="product-card" data-id="1" data-name="Reloj de Zafiro Nocturno" data-price="250.00">
+                    <img src="placeholder-producto-1.jpg" alt="Reloj de pulsera de zafiro en color negro.">
+                    <h3>Reloj de Zafiro Nocturno</h3>
+                    <p class="price">$250.00</p>
+                    <button class="add-to-cart">Añadir al Santuario</button>
+                </div>
+                <div class="product-card" data-id="1" data-name="Reloj de Zafiro Nocturno" data-price="250.00">
+                    <img src="placeholder-producto-1.jpg" alt="Reloj de pulsera de zafiro en color negro.">
+                    <h3>Reloj de Zafiro Nocturno</h3>
+                    <p class="price">$250.00</p>
+                    <button class="add-to-cart">Añadir al Santuario</button>
+                </div>
+                <div class="product-card" data-id="1" data-name="Reloj de Zafiro Nocturno" data-price="250.00">
+                    <img src="placeholder-producto-1.jpg" alt="Reloj de pulsera de zafiro en color negro.">
+                    <h3>Reloj de Zafiro Nocturno</h3>
+                    <p class="price">$250.00</p>
+                    <button class="add-to-cart">Añadir al Santuario</button>
+                </div>
+                </div>
+        </section>
+        
+        <section id="cart-modal" class="cart-modal" aria-modal="true" role="dialog" aria-labelledby="cart-title">
+            <div class="cart-content">
+                <h2 id="cart-title">Tu Santuario de Pedidos</h2>
+                <ul id="cart-items">
+                    <li>El Santuario está esperando...</li>
+                </ul>
+                <div class="discreet-input-group">
+                <label for="client-name" style="color: var(--color-secondary-accent);">Nombre Discreto o Clave:</label>
+                <input type="text" id="client-name" placeholder="Ej: 'Mi Clave Secreta'" required>
+                </div>
+                <p class="cart-total">Total: <span id="cart-total">$0.00</span></p>
+                <button id="close-cart-btn" class="secondary-button">Cerrar</button>
+                <button id="checkout-whatsapp-btn" class="cta-button">🛍️ Confirmar Pedido (WhatsApp)</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 Santuario Secreto. Todos los derechos reservados. | <a href="#" aria-label="Política de Privacidad">Privacidad</a> | <a href="#" aria-label="Términos y Condiciones de Venta">Términos</a></p>
+        <p id="contacto">Asistencia Exclusiva: +58 412 202 1747 (Sólo WhatsApp)</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,484 @@
+/* ======================================= */
+/* 🎨 Estilos Generales y Reset */
+/* ======================================= */
+:root {
+    --color-background-dark: #121212;
+    --color-primary-accent: #B8860B; 
+    --color-secondary-accent: #6A057F; 
+    --color-text-light: #F0F0F0;
+    --color-card-background: #1e1e1e;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Roboto', sans-serif;
+}
+
+/* ⚠️ Ajustes para Accesibilidad y Diseño Moderno */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--color-background-dark);
+    color: var(--color-text-light);
+    line-height: 1.6;
+}
+
+/* ======================================= */
+/* 💎 Tipografía y Elementos de Lujo */
+/* ======================================= */
+h1, h2, h3 {
+    font-family: var(--font-serif);
+    color: var(--color-primary-accent);
+    margin-bottom: 0.5em;
+    font-weight: 700;
+}
+
+a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-primary-accent); 
+}
+
+/* ♿ Accesibilidad: Enfoque de teclado claro */
+a:focus, button:focus {
+    outline: 2px solid var(--color-secondary-accent);
+    outline-offset: 3px;
+}
+
+/* ======================================= */
+/* ⬆️ Header y Navegación (Base) */
+/* ======================================= */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: var(--color-card-background);
+    border-bottom: 1px solid var(--color-secondary-accent);
+    position: sticky; /* Sticky para que el menú siempre esté visible */
+    top: 0;
+    z-index: 50; /* Alto z-index para que esté sobre otros elementos */
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--color-primary-accent);
+    letter-spacing: 3px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px; /* Separación más amplia en escritorio */
+}
+
+/* 🍔 Botón de Hamburguesa (Oculto en escritorio por defecto) */
+.menu-toggle {
+    display: none; 
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--color-primary-accent);
+    cursor: pointer;
+    z-index: 101; 
+}
+
+/* ======================================= */
+/* 🖼️ Hero y Botones CTA */
+/* ======================================= */
+/* ======================================= */
+/* 🖼️ Estilos para el Carrusel (Slider) */
+/* ======================================= */
+#hero-carousel {
+    position: relative; /* Esencial para posicionar el contenido y los slides */
+    overflow: hidden; /* Oculta los slides que no están activos */
+    padding: 0;
+    min-height: 80vh;
+    border-bottom: 5px double var(--color-primary-accent);
+}
+
+.carousel-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.carousel-slide {
+    width: 100%;
+    min-width: 100%; /* Asegura que cada slide ocupe el 100% */
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Efecto Parallax Sutil: Ayuda al aura de lujo */
+    background-attachment: fixed; 
+    
+    /* Configuración inicial: Ocultos por defecto */
+    opacity: 0;
+    position: absolute; 
+    transition: opacity 1.5s ease-in-out; /* Transición lenta y elegante */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.carousel-slide.active {
+    opacity: 1; /* Muestra el slide activo */
+    position: relative; /* El slide activo mantiene el flujo */
+}
+
+.slide-content {
+    background: rgba(0, 0, 0, 0.7); /* Oscurece ligeramente el contenido para legibilidad */
+    padding: 30px 50px;
+    border: 1px solid var(--color-primary-accent);
+    max-width: 80%;
+}
+
+.slide-content h2.slide-title {
+    font-size: 3rem;
+    color: var(--color-text-light);
+    margin-bottom: 0.5rem;
+}
+
+.slide-content p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Estilos para los puntos de navegación */
+.carousel-dots-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 20;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    background-color: rgba(255, 255, 255, 0.5); /* Gris sutil */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.dot.active, .dot:hover {
+    background-color: var(--color-primary-accent); /* Dorado al pasar o activo */
+    transform: scale(1.2);
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 0.2em;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: rgba(240, 240, 240, 0.8);
+}
+
+.cta-button, .add-to-cart {
+    background-color: var(--color-primary-accent);
+    color: var(--color-background-dark);
+    padding: 12px 30px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.2s;
+    border-radius: 5px;
+}
+
+.cta-button:hover, .add-to-cart:hover {
+    background-color: #ffd700;
+    transform: scale(1.05);
+}
+
+/* ======================================= */
+/* 🛍️ Productos y Cards */
+/* ======================================= */
+.productos {
+    padding: 50px 5%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.product-card {
+    background-color: var(--color-card-background);
+    padding: 20px;
+    border: 1px solid var(--color-secondary-accent);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 5px;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); 
+}
+
+.product-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.product-card h3 {
+    color: var(--color-text-light);
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+}
+
+.product-card .price {
+    color: var(--color-primary-accent);
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+/* ======================================= */
+/* 🛒 Carrito Modal y Footer (Sin cambios funcionales por ahora) */
+/* ======================================= */
+.cart-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.cart-modal.active {
+    display: flex;
+}
+
+.cart-content {
+    background-color: var(--color-card-background);
+    padding: 40px;
+    width: 90%;
+    max-width: 600px;
+    border: 2px solid var(--color-primary-accent);
+    box-shadow: 0 0 30px rgba(184, 134, 11, 0.4);
+}
+
+#cart-items {
+    list-style: none;
+    margin-bottom: 20px;
+    border-top: 1px solid var(--color-secondary-accent);
+    padding-top: 10px;
+}
+
+.cart-total {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-primary-accent);
+    margin-bottom: 20px;
+}
+
+.secondary-button {
+    background-color: transparent;
+    color: var(--color-text-light);
+    border: 1px solid var(--color-text-light);
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-right: 10px;
+}
+
+.secondary-button:hover {
+    background-color: var(--color-secondary-accent);
+    border-color: var(--color-secondary-accent);
+}
+
+.footer {
+    text-align: center;
+    padding: 20px 5%;
+    background-color: var(--color-card-background);
+    border-top: 1px solid var(--color-secondary-accent);
+    font-size: 0.9rem;
+    color: rgba(240, 240, 240, 0.7);
+}
+
+.footer p {
+    margin-bottom: 5px;
+}
+
+/* ======================================= */
+/* 🔎 Estilos para Filtros (Búsqueda y Rango) */
+/* ======================================= */
+.filters-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se muevan a la siguiente línea en pantallas pequeñas */
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    padding: 20px 5%;
+    background-color: var(--color-card-background);
+    border-top: 1px solid var(--color-secondary-accent);
+    border-bottom: 1px solid var(--color-secondary-accent);
+}
+
+.filter-label {
+    color: var(--color-primary-accent);
+    font-weight: 400;
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+}
+
+/* Estilos de la barra de búsqueda y el campo de nombre discreto */
+.search-input, #client-name {
+    padding: 10px;
+    border: 1px solid var(--color-secondary-accent);
+    background-color: var(--color-background-dark);
+    color: var(--color-text-light);
+    font-size: 1rem;
+    width: 200px; /* Ancho fijo para desktop */
+    transition: border-color 0.3s;
+}
+
+.search-input:focus, #client-name:focus {
+    border-color: var(--color-primary-accent);
+    outline: none;
+}
+
+/* Estilos para el deslizador de precio */
+.price-slider {
+    -webkit-appearance: none; /* Oculta el estilo por defecto en Chrome/Safari */
+    appearance: none;
+    width: 150px;
+    height: 5px;
+    background: var(--color-secondary-accent);
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+}
+
+.price-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: var(--color-primary-accent);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.price-slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background: var(--color-primary-accent);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+/* ======================================= */
+/* 📱 MEDIA QUERIES (RESPONSIVIDAD) */
+/* ======================================= */
+
+@media (max-width: 768px) {
+    
+    /* 🍔 Estilos del Menú de Hamburguesa en Móvil */
+    .menu-toggle {
+        display: block; /* Muestra el botón de hamburguesa */
+    }
+
+    nav {
+        /* Oculta la navegación grande */
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 70%; /* La navegación lateral ocupa el 70% de la pantalla */
+        background-color: var(--color-background-dark);
+        /* 💡 Efecto de deslizamiento elegante */
+        transform: translateX(100%); 
+        transition: transform 0.4s ease-in-out;
+        z-index: 100;
+        padding-top: 80px; /* Espacio para que no choque con el logo */
+    }
+
+    /* Clase que JavaScript añadirá para mostrar el menú */
+    nav.active {
+        transform: translateX(0);
+    }
+
+    nav ul {
+        flex-direction: column; /* Apila los enlaces verticalmente */
+        align-items: center;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    nav ul li a {
+        font-size: 1.2rem;
+        padding: 10px 0;
+        display: block;
+    }
+
+    /* Ajustes generales */
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+    .product-grid {
+        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+    }
+}
+
+/* 📱 Responsividad para filtros */
+@media (max-width: 768px) {
+    .filters-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .search-input, #client-name {
+        width: 100%; /* Ocupa todo el ancho en móvil */
+        max-width: 300px;
+    }
+}
+
+/* 📱 Responsividad del Carrusel */
+@media (max-width: 768px) {
+    .slide-content h2.slide-title {
+        font-size: 2rem;
+    }
+    .slide-content p {
+        font-size: 1rem;
+    }
+}

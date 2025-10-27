@@ -38,6 +38,10 @@ const productListContainer = document.getElementById('product-list'); // Contene
 const cartItemsUl = document.getElementById('cart-items');
 const cartTotalSpan = document.getElementById('cart-total');
 const clientNameInput = document.getElementById('client-name'); // Nuevo campo de nombre
+const checkoutMessage = document.getElementById('checkout-message');
+
+// gestión de foco
+let lastFocusedElement = null;
 
 // 📞 TU NÚMERO DE TELÉFONO para WhatsApp
 const WHATSAPP_PHONE = "584122021747"; // ¡Asegúrate de cambiar este número!
@@ -90,6 +94,7 @@ function updateCartDisplay() {
         cartItemsUl.innerHTML = '<li>El Santuario está esperando... (Carrito Vacío)</li>';
         cartTotalSpan.textContent = '$0.00';
         cartCountSpan.textContent = 0;
+        updateCheckoutButtonState();
         return;
     }
     
@@ -114,6 +119,7 @@ function updateCartDisplay() {
     document.querySelectorAll('.remove-item').forEach(button => {
         button.addEventListener('click', removeItemFromCart);
     });
+    updateCheckoutButtonState();
 }
 
 function removeItemFromCart(event) {
@@ -135,13 +141,19 @@ function removeItemFromCart(event) {
 // --- FUNCIÓN WHATSAPP ACTUALIZADA ---
 
 function generateWhatsAppLink() {
+    // Validaciones: carrito y nombre/clavE obligatoria
+    clearCheckoutMessage();
     if (cart.length === 0) {
-        alert("Tu carrito está vacío. Añade artículos antes de confirmar.");
+        showCheckoutMessage('Tu carrito está vacío. Añade artículos antes de confirmar.', 'error');
         return;
     }
-    
-    // Obtener el nombre discreto
-    const clientName = clientNameInput.value.trim() || "Cliente Anónimo";
+
+    const clientName = clientNameInput.value.trim();
+    if (!clientName) {
+        showCheckoutMessage('Por favor ingresa tu Nombre Discreto o Clave antes de confirmar el pedido.', 'error');
+        clientNameInput.focus();
+        return;
+    }
 
     let message = `*PEDIDO SECRETO*\n\n*Nombre/Clave:* ${clientName}\n\n`;
     message += "He realizado un pedido en tu Santuario. Por favor, confírmalo:\n\n";
@@ -159,15 +171,75 @@ function generateWhatsAppLink() {
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodedMessage}`;
     
+    // Indicar que se está abriendo WhatsApp y deshabilitar el botón para prevenir múltiples clicks
+    showCheckoutMessage('Abriendo WhatsApp…', 'success');
+    checkoutBtn.disabled = true;
     window.open(whatsappUrl, '_blank');
-    
+
     // Limpiar el carrito y almacenamiento después del pedido
     cart = [];
     saveCartToLocalStorage();
     updateCartDisplay();
-    cartModal.classList.remove('active');
+    closeCartModal();
     clientNameInput.value = ''; // Limpiar el campo de nombre
+    // Mostrar confirmación breve
+    setTimeout(() => clearCheckoutMessage(), 2500);
 }
+
+/* ======== Estado del botón de checkout ======== */
+function updateCheckoutButtonState() {
+    // Deshabilita el botón si no hay items o si la clave está vacía
+    const hasItems = cart.length > 0;
+    const hasName = clientNameInput && clientNameInput.value.trim().length > 0;
+    if (checkoutBtn) checkoutBtn.disabled = !(hasItems && hasName);
+}
+
+// Escuchar cambios en el campo del nombre para habilitar/deshabilitar el checkout
+if (clientNameInput) {
+    clientNameInput.addEventListener('input', updateCheckoutButtonState);
+}
+
+// Helpers para mensajes inline
+function showCheckoutMessage(text, type) {
+    if (!checkoutMessage) return;
+    checkoutMessage.textContent = text;
+    checkoutMessage.classList.remove('error', 'success');
+    checkoutMessage.classList.add(type === 'success' ? 'success' : 'error');
+    checkoutMessage.hidden = false;
+}
+
+function clearCheckoutMessage() {
+    if (!checkoutMessage) return;
+    checkoutMessage.textContent = '';
+    checkoutMessage.classList.remove('error', 'success');
+    checkoutMessage.hidden = true;
+}
+
+// Funciones de apertura/cierre del modal con manejo de foco
+function openCartModal() {
+    lastFocusedElement = document.activeElement;
+    cartModal.classList.add('active');
+    cartModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    // poner el foco en el primer control del modal
+    const focusTarget = cartModal.querySelector('#client-name') || cartModal.querySelector('#close-cart-btn');
+    if (focusTarget) focusTarget.focus();
+}
+
+function closeCartModal() {
+    cartModal.classList.remove('active');
+    cartModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearCheckoutMessage();
+    if (lastFocusedElement) lastFocusedElement.focus();
+}
+
+// Cerrar modal con Escape
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && cartModal.classList.contains('active')) {
+        closeCartModal();
+    }
+});
 
 
 // =======================================
@@ -238,12 +310,12 @@ productListContainer.addEventListener('click', (event) => {
 cartIcon.addEventListener('click', (e) => {
     e.preventDefault(); 
     updateCartDisplay();
-    cartModal.classList.add('active');
+    openCartModal();
 });
 
 // 4. Evento: Botón "Cerrar" Modal
 closeCartBtn.addEventListener('click', () => {
-    cartModal.classList.remove('active');
+    closeCartModal();
 });
 
 // 5. Evento: Botón "Confirmar Pedido (WhatsApp)"

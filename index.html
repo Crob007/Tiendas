@@ -121,7 +121,7 @@
                 </div>
         </section>
         
-        <section id="cart-modal" class="cart-modal" aria-modal="true" role="dialog" aria-labelledby="cart-title">
+        <section id="cart-modal" class="cart-modal" aria-modal="true" role="dialog" aria-labelledby="cart-title" aria-hidden="true" tabindex="-1">
             <div class="cart-content">
                 <h2 id="cart-title">Tu Santuario de Pedidos</h2>
                 <ul id="cart-items">
@@ -131,9 +131,10 @@
                 <label for="client-name" style="color: var(--color-secondary-accent);">Nombre Discreto o Clave:</label>
                 <input type="text" id="client-name" placeholder="Ej: 'Mi Clave Secreta'" required>
                 </div>
+                <p id="checkout-message" class="checkout-message" aria-live="polite" role="status" hidden></p>
                 <p class="cart-total">Total: <span id="cart-total">$0.00</span></p>
-                <button id="close-cart-btn" class="secondary-button">Cerrar</button>
-                <button id="checkout-whatsapp-btn" class="cta-button">🛍️ Confirmar Pedido (WhatsApp)</button>
+                <button id="close-cart-btn" class="secondary-button" aria-label="Cerrar carrito">Cerrar</button>
+                <button id="checkout-whatsapp-btn" class="cta-button" disabled>🛍️ Confirmar Pedido (WhatsApp)</button>
             </div>
         </section>
     </main>
